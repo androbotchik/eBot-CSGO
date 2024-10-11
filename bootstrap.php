@@ -102,6 +102,7 @@ if ($config->getNodeStartupMethod() != "none") {
             usleep(400000);
             $status = proc_get_status($webSocketProcess);
             if (!$status['running']) {
+                echo "| Ошибка при запуске процесса: " . error_get_last()['message'];
                 echo '| WebSocket server crashed' . PHP_EOL;
                 echo '-----------------------------------------------------' . PHP_EOL;
                 die();

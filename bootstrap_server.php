@@ -98,7 +98,7 @@ if (PHP_OS == "Linux") {
         usleep(400000);
         $status = proc_get_status($webSocketProcess);
         if (!$status['running']) {
-            echo "| Server Ошибка при запуске процесса: ";
+            echo "| Server Ошибка при запуске процесса: " . PHP_EOL;
             echo '| WebSocket server crashed' . PHP_EOL;
             echo '-----------------------------------------------------' . PHP_EOL;
             die();

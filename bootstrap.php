@@ -96,7 +96,7 @@ if ($config->getNodeStartupMethod() != "none") {
             1 => array("file", APP_ROOT . "logs" . DIRECTORY_SEPARATOR . "websocket.log", "a"),
             2 => array("file", APP_ROOT . "logs" . DIRECTORY_SEPARATOR . "websocket.error", "a")
         );
-        $text = $config->getNodeStartupMethod() . ' ' . APP_ROOT . 'websocket_server.mjs ' . \eBot\Config\Config::getInstance()->getBot_ip() . ' ' . \eBot\Config\Config::getInstance()->getBot_port() . ' ' . (\eBot\Config\Config::getInstance()->isSSLEnabled() ? 'TRUE': 'FALSE') . ' ' . \eBot\Config\Config::getInstance()->getSSLCertificatePath() . ' ' . \eBot\Config\Config::getInstance()->getSSLKeyPath();
+        $text = $config->getNodeStartupMethod() . ' ' . APP_ROOT . 'websocket_server.mjs ' . \eBot\Config\Config::getInstance()->getBot_ipForBootstrap() . ' ' . \eBot\Config\Config::getInstance()->getBot_port() . ' ' . (\eBot\Config\Config::getInstance()->isSSLEnabled() ? 'TRUE': 'FALSE') . ' ' . \eBot\Config\Config::getInstance()->getSSLCertificatePath() . ' ' . \eBot\Config\Config::getInstance()->getSSLKeyPath();
 	    $webSocketProcess = proc_open($text, $descriptorspec, $pipes);
         if (is_resource($webSocketProcess)) {
             fclose($pipes[0]);

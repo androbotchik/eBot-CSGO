@@ -521,6 +521,11 @@ class Config extends Singleton
         return $this->bot_ip;
     }
 
+    public function getBot_ipForBootstrap()
+    {
+        return '0.0.0.0';
+    }
+
     public function setBot_ip($bot_ip)
     {
         $this->bot_ip = $bot_ip;

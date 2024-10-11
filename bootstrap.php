@@ -96,13 +96,15 @@ if ($config->getNodeStartupMethod() != "none") {
             1 => array("file", APP_ROOT . "logs" . DIRECTORY_SEPARATOR . "websocket.log", "a"),
             2 => array("file", APP_ROOT . "logs" . DIRECTORY_SEPARATOR . "websocket.error", "a")
         );
-	    $webSocketProcess = proc_open($config->getNodeStartupMethod() . ' ' . APP_ROOT . 'websocket_server.mjs ' . \eBot\Config\Config::getInstance()->getBot_ip() . ' ' . \eBot\Config\Config::getInstance()->getBot_port() . ' ' . (\eBot\Config\Config::getInstance()->isSSLEnabled() ? 'TRUE': 'FALSE') . ' ' . \eBot\Config\Config::getInstance()->getSSLCertificatePath() . ' ' . \eBot\Config\Config::getInstance()->getSSLKeyPath(), $descriptorspec, $pipes);
+        $text = $config->getNodeStartupMethod() . ' ' . APP_ROOT . 'websocket_server.mjs ' . \eBot\Config\Config::getInstance()->getBot_ip() . ' ' . \eBot\Config\Config::getInstance()->getBot_port() . ' ' . (\eBot\Config\Config::getInstance()->isSSLEnabled() ? 'TRUE': 'FALSE') . ' ' . \eBot\Config\Config::getInstance()->getSSLCertificatePath() . ' ' . \eBot\Config\Config::getInstance()->getSSLKeyPath();
+	    $webSocketProcess = proc_open($text, $descriptorspec, $pipes);
         if (is_resource($webSocketProcess)) {
             fclose($pipes[0]);
             usleep(400000);
             $status = proc_get_status($webSocketProcess);
             if (!$status['running']) {
-                echo "| Ошибка при запуске процесса: " . error_get_last()['message'];
+                echo '| ' . $text;
+                echo "| Ошибка при запуске процесса: " . $webSocketProcess;
                 echo '| WebSocket server crashed' . PHP_EOL;
                 echo '-----------------------------------------------------' . PHP_EOL;
                 die();

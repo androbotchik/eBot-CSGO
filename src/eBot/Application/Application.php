@@ -142,7 +142,7 @@ class Application extends AbstractApplication
                         $text = \eTools\Utils\Encryption::decrypt($data[0], $authkey, 256);
                         Logger::log("DEBUG: Расшифрованный текст: " . $text);
                         if ($text) {
-                            if (preg_match("!^(?<id>\d+) stopNoRs (?<ip>\d+\.\d+\.\d+\.\d+\:\d+)$!", $text, $preg)) {
+                            if (preg_match("!^(?<id>\d+) stopNoRs (?<ip>[a-zA-Z0-9\.-]+:\d+)$!", $text, $preg)) {
                                 $match = \eBot\Manager\MatchManager::getInstance()->getMatch($preg["ip"]);
                                 Logger::log("DEBUG: Команда stopNoRs найдена: " . $text);
                                 if ($match) {
@@ -154,7 +154,7 @@ class Application extends AbstractApplication
                                 } else {
                                     Logger::error($preg["ip"] . " is not managed !");
                                 }
-                            } else if (preg_match("!^(?<id>\d+) stop (?<ip>\d+\.\d+\.\d+\.\d+\:\d+)$!", $text, $preg)) {
+                            } else if (preg_match("!^(?<id>\d+) stop (?<ip>[a-zA-Z0-9\.-]+:\d+)$!", $text, $preg)) {
                                 $match = \eBot\Manager\MatchManager::getInstance()->getMatch($preg["ip"]);
                                 if ($match) {
                                     $reply = $match->adminStop();
@@ -176,7 +176,7 @@ class Application extends AbstractApplication
                                 } else {
                                     Logger::error($preg["ip"] . " is not managed !");
                                 }
-                            } else if (preg_match("!^(?<id>\d+) passknife (?<ip>\d+\.\d+\.\d+\.\d+\:\d+)$!", $text, $preg)) {
+                            } else if (preg_match("!^(?<id>\d+) passknife (?<ip>[a-zA-Z0-9\.-]+:\d+)$!", $text, $preg)) {
                                 $match = \eBot\Manager\MatchManager::getInstance()->getMatch($preg["ip"]);
                                 if ($match) {
                                     $reply = $match->adminPassKnife();
@@ -187,7 +187,7 @@ class Application extends AbstractApplication
                                 } else {
                                     Logger::error($preg["ip"] . " is not managed !");
                                 }
-                            } else if (preg_match("!^(?<id>\d+) forceknife (?<ip>\d+\.\d+\.\d+\.\d+\:\d+)$!", $text, $preg)) {
+                            } else if (preg_match("!^(?<id>\d+) forceknife (?<ip>[a-zA-Z0-9\.-]+:\d+)$!", $text, $preg)) {
                                 $match = \eBot\Manager\MatchManager::getInstance()->getMatch($preg["ip"]);
                                 if ($match) {
                                     $reply = $match->adminForceKnife();
@@ -198,7 +198,7 @@ class Application extends AbstractApplication
                                 } else {
                                     Logger::error($preg["ip"] . " is not managed !");
                                 }
-                            } else if (preg_match("!^(?<id>\d+) forceknifeend (?<ip>\d+\.\d+\.\d+\.\d+\:\d+)$!", $text, $preg)) {
+                            } else if (preg_match("!^(?<id>\d+) forceknifeend (?<ip>[a-zA-Z0-9\.-]+:\d+)$!", $text, $preg)) {
                                 $match = \eBot\Manager\MatchManager::getInstance()->getMatch($preg["ip"]);
                                 if ($match) {
                                     $reply = $match->adminForceKnifeEnd();
@@ -209,7 +209,7 @@ class Application extends AbstractApplication
                                 } else {
                                     Logger::error($preg["ip"] . " is not managed !");
                                 }
-                            } else if (preg_match("!^(?<id>\d+) forcestart (?<ip>\d+\.\d+\.\d+\.\d+\:\d+)$!", $text, $preg)) {
+                            } else if (preg_match("!^(?<id>\d+) forcestart (?<ip>[a-zA-Z0-9\.-]+:\d+)$!", $text, $preg)) {
                                 $match = \eBot\Manager\MatchManager::getInstance()->getMatch($preg["ip"]);
                                 if ($match) {
                                     $reply = $match->adminForceStart();
@@ -220,7 +220,7 @@ class Application extends AbstractApplication
                                 } else {
                                     Logger::error($preg["ip"] . " is not managed !");
                                 }
-                            } else if (preg_match("!^(?<id>\d+) stopback (?<ip>\d+\.\d+\.\d+\.\d+\:\d+)$!", $text, $preg)) {
+                            } else if (preg_match("!^(?<id>\d+) stopback (?<ip>[a-zA-Z0-9\.-]+:\d+)$!", $text, $preg)) {
                                 $match = \eBot\Manager\MatchManager::getInstance()->getMatch($preg["ip"]);
                                 if ($match) {
                                     $reply = $match->adminStopBack();
@@ -231,7 +231,7 @@ class Application extends AbstractApplication
                                 } else {
                                     Logger::error($preg["ip"] . " is not managed !");
                                 }
-                            } else if (preg_match("!^(?<id>\d+) pauseunpause (?<ip>\d+\.\d+\.\d+\.\d+\:\d+)$!", $text, $preg)) {
+                            } else if (preg_match("!^(?<id>\d+) pauseunpause (?<ip>[a-zA-Z0-9\.-]+:\d+)$!", $text, $preg)) {
                                 $match = \eBot\Manager\MatchManager::getInstance()->getMatch($preg["ip"]);
                                 if ($match) {
                                     $reply = $match->adminPauseUnpause();
@@ -242,7 +242,7 @@ class Application extends AbstractApplication
                                 } else {
                                     Logger::error($preg["ip"] . " is not managed !");
                                 }
-                            } else if (preg_match("!^(?<id>\d+) fixsides (?<ip>\d+\.\d+\.\d+\.\d+\:\d+)$!", $text, $preg)) {
+                            } else if (preg_match("!^(?<id>\d+) fixsides (?<ip>[a-zA-Z0-9\.-]+:\d+)$!", $text, $preg)) {
                                 $match = \eBot\Manager\MatchManager::getInstance()->getMatch($preg["ip"]);
                                 if ($match) {
                                     $reply = $match->adminFixSides();
@@ -253,7 +253,7 @@ class Application extends AbstractApplication
                                 } else {
                                     Logger::error($preg["ip"] . " is not managed !");
                                 }
-                            } else if (preg_match("!^(?<id>\d+) streamerready (?<ip>\d+\.\d+\.\d+\.\d+\:\d+)$!", $text, $preg)) {
+                            } else if (preg_match("!^(?<id>\d+) streamerready (?<ip>[a-zA-Z0-9\.-]+:\d+)$!", $text, $preg)) {
                                 $match = \eBot\Manager\MatchManager::getInstance()->getMatch($preg["ip"]);
                                 if ($match) {
                                     $reply = $match->adminStreamerReady();
@@ -275,7 +275,7 @@ class Application extends AbstractApplication
                                 } else {
                                     Logger::error($preg["ip"] . " is not managed !");
                                 }
-                            } else if (preg_match("!^(?<id>\d+) skipmap (?<ip>\d+\.\d+\.\d+\.\d+\:\d+)$!", $text, $preg)) {
+                            } else if (preg_match("!^(?<id>\d+) skipmap (?<ip>[a-zA-Z0-9\.-]+:\d+)$!", $text, $preg)) {
                                 $match = \eBot\Manager\MatchManager::getInstance()->getMatch($preg["ip"]);
                                 if ($match) {
                                     $reply = $match->adminSkipMap();

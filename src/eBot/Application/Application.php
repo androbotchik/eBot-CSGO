@@ -126,12 +126,17 @@ class Application extends AbstractApplication
                     } else if ($data == '__aliveCheck__') {
                         $this->websocket['aliveCheck']->sendData('__isAlive__');
                     } else {
+                        Logger::log("DEBUG: Получено из Redis (сырая строка): " . $data);
                         $data = json_decode($data, true);
+                        Logger::log("DEBUG: Декодировано в PHP (var_export): " . var_export($decoded_data, true));
                         $authkey = \eBot\Manager\MatchManager::getInstance()->getAuthkey($data[1]);
+                        Logger::log("DEBUG: Authkey получен: " . $authkey);
                         $text = \eTools\Utils\Encryption::decrypt($data[0], $authkey, 256);
+                        Logger::log("DEBUG: Расшифрованный текст: " . $text);
                         if ($text) {
                             if (preg_match("!^(?<id>\d+) stopNoRs (?<ip>\d+\.\d+\.\d+\.\d+\:\d+)$!", $text, $preg)) {
                                 $match = \eBot\Manager\MatchManager::getInstance()->getMatch($preg["ip"]);
+                                Logger::log("DEBUG: Команда stopNoRs найдена: " . $text);
                                 if ($match) {
                                     $reply = $match->adminStopNoRs();
                                     if ($reply) {

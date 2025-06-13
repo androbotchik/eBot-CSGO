@@ -117,11 +117,11 @@ const config = parse(fs.readFileSync('./config/config.ini', 'utf-8'));
         });
 
         socket.on('rconSend', function (data) {
-            client.lPush(config.Redis.REDIS_CHANNEL_EBOT_FROM_WS, data);
+            client.lPush(config.Redis.REDIS_CHANNEL_EBOT_FROM_WS, JSON.stringify(data));
         });
 
         socket.on('matchCommandSend', function (data) {
-            client.lPush(config.Redis.REDIS_CHANNEL_EBOT_FROM_WS, data);
+            client.lPush(config.Redis.REDIS_CHANNEL_EBOT_FROM_WS, JSON.stringify(data));
         });
     });
 

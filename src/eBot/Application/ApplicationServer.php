@@ -143,7 +143,7 @@ class ApplicationServer extends AbstractApplication {
                                 } else {
                                     Logger::error($preg["ip"] . " is not managed !");
                                 }
-                            } elseif (preg_match("!^(?<id>\d+) executeCommand (?<ip>[a-zA-Z0-9\.-]+:\d+)$! (?<command>.*)$!", $text, $preg)) {
+                            } elseif (preg_match("!^(?<id>\d+) executeCommand (?<ip>[a-zA-Z0-9\.-]+:\d+)\s+(?<command>.*)$!", $text, $preg)) {
                                 $match = \eBot\Manager\MatchManagerServer::getInstance()->getMatch($preg["ip"]);
                                 if ($match) {
                                     $this->socket->sendto($origData, \eBot\Config\Config::getInstance()->getBot_ip(), \eBot\Config\Config::getInstance()->getBot_port() + $match['i']);

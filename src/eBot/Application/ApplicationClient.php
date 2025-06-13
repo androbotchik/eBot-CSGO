@@ -130,7 +130,7 @@ class ApplicationClient extends AbstractApplication {
                                 } else {
                                     Logger::error($preg["ip"] . " is not managed !");
                                 }
-                            } elseif (preg_match("!^(?<id>\d+) executeCommand (?<ip>[a-zA-Z0-9\.-]+:\d+) (?<command>.*)$!", $text, $preg)) {
+                            } elseif (preg_match("!^(?<id>\d+) executeCommand (?<ip>[a-zA-Z0-9\.-]+:\d+)\s+(?<command>.*)$!", $text, $preg)) {
                                 $match = \eBot\Manager\MatchManagerClient::getInstance()->getMatch($preg["ip"]);
                                 if ($match) {
                                     $reply = $match->adminExecuteCommand($preg["command"]);

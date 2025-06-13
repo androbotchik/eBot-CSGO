@@ -156,7 +156,7 @@ class Application extends AbstractApplication
                                 } else {
                                     Logger::error($preg["ip"] . " is not managed !");
                                 }
-                            } else if (preg_match("!^(?<id>\d+) executeCommand (?<ip>[a-zA-Z0-9\.-]+:\d+)$! (?<command>.*)$!", $text, $preg)) {
+                            } else if (preg_match("!^(?<id>\d+) executeCommand (?<ip>[a-zA-Z0-9\.-]+:\d+)\s+(?<command>.*)$!", $text, $preg)) {
                                 $match = \eBot\Manager\MatchManager::getInstance()->getMatch($preg["ip"]);
                                 if ($match) {
                                     $reply = $match->adminExecuteCommand($preg["command"]);

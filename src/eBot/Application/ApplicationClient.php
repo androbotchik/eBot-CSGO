@@ -101,7 +101,10 @@ class ApplicationClient extends AbstractApplication {
                     } elseif (preg_match("!^addMatch (?<id>\d+)$!", $data, $preg)) {
                         MatchManagerClient::getInstance()->engageMatch($preg['id']);
                     } else {
-                        $data = json_decode($data, true);
+                        $data_cleaned = trim($data, '"');
+                        $data_cleaned = stripslashes($data_cleaned);
+
+                        $data = json_decode($data_cleaned, true);
                         $authkey = \eBot\Manager\MatchManagerClient::getInstance()->getAuthkey($data[1]);
                         $text = \eTools\Utils\Encryption::decrypt($data[0], $authkey, 256);
                         if ($text) {

@@ -126,21 +126,12 @@ class Application extends AbstractApplication
                     } else if ($data == '__aliveCheck__') {
                         $this->websocket['aliveCheck']->sendData('__isAlive__');
                     } else {
-                        Logger::log("DEBUG: Получено из Redis (сырая строка): " . $data);
-                                // --- НОВОЕ ИЗМЕНЕНИЕ ЗДЕСЬ ---
-                        // Удаляем внешние кавычки, если они есть. str_starts_with и str_ends_with требуют PHP 8.0+.
-                        // Если у тебя более старая версия PHP, используй substr или trim.
                         $data_cleaned = trim($data, '"');
                         $data_cleaned = stripslashes($data_cleaned);
-                        Logger::log("DEBUG: Строка очищена от внешних кавычек: " . $data_cleaned);                        
-                        // --- КОНЕЦ ИЗМЕНЕНИЯ ---
 
                         $data = json_decode($data_cleaned, true);
-                        Logger::log("DEBUG: Декодировано в PHP (var_export): " . var_export($data, true));
                         $authkey = \eBot\Manager\MatchManager::getInstance()->getAuthkey($data[1]);
-                        Logger::log("DEBUG: Authkey получен: " . $authkey);
                         $text = \eTools\Utils\Encryption::decrypt($data[0], $authkey, 256);
-                        Logger::log("DEBUG: Расшифрованный текст: " . $text);
                         if ($text) {
                             if (preg_match("!^(?<id>\d+) stopNoRs (?<ip>[a-zA-Z0-9\.-]+:\d+)$!", $text, $preg)) {
                                 $match = \eBot\Manager\MatchManager::getInstance()->getMatch($preg["ip"]);

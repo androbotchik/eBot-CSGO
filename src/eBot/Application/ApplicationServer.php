@@ -122,7 +122,10 @@ class ApplicationServer extends AbstractApplication {
                         MatchManagerServer::getInstance()->removeMatch($preg['id']);
                     } else {
                         $origData = $data;
-                        $data = json_decode($data, true);
+                        $data_cleaned = trim($data, '"');
+                        $data_cleaned = stripslashes($data_cleaned);
+
+                        $data = json_decode($data_cleaned, true);
                         $authkey = \eBot\Manager\MatchManagerServer::getInstance()->getAuthkey($data[1]);
                         $text = \eTools\Utils\Encryption::decrypt($data[0], $authkey, 256);
                         if ($text) {

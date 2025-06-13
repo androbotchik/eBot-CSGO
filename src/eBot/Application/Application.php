@@ -131,6 +131,7 @@ class Application extends AbstractApplication
                         // Удаляем внешние кавычки, если они есть. str_starts_with и str_ends_with требуют PHP 8.0+.
                         // Если у тебя более старая версия PHP, используй substr или trim.
                         $data_cleaned = trim($data, '"');
+                        $data_cleaned = stripslashes($data_cleaned);
                         Logger::log("DEBUG: Строка очищена от внешних кавычек: " . $data_cleaned);                        
                         // --- КОНЕЦ ИЗМЕНЕНИЯ ---
 

@@ -130,12 +130,8 @@ class Application extends AbstractApplication
                                 // --- НОВОЕ ИЗМЕНЕНИЕ ЗДЕСЬ ---
                         // Удаляем внешние кавычки, если они есть. str_starts_with и str_ends_with требуют PHP 8.0+.
                         // Если у тебя более старая версия PHP, используй substr или trim.
-                        if (str_starts_with($data, '"') && str_ends_with($data, '"')) {
-                            $data_cleaned = substr($data, 1, -1); // Удаляем первый и последний символ (кавычки)
-                            Logger::log("DEBUG: Строка очищена от внешних кавычек: " . $data_cleaned);
-                        } else {
-                            $data_cleaned = $data;
-                        }
+                        $data_cleaned = trim($data, '"')
+                        Logger::log("DEBUG: Строка очищена от внешних кавычек: " . $data_cleaned);                        
                         // --- КОНЕЦ ИЗМЕНЕНИЯ ---
 
                         $data = json_decode($data_cleaned, true);

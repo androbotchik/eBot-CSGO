@@ -14,7 +14,7 @@ class ReportManager extends Singleton implements Taskable
 {
     public function __construct()
     {
-        TaskManager::getInstance()->addTask(new Task($this, "sendReport", microtime(true) + 10), true);
+        // TaskManager::getInstance()->addTask(new Task($this, "sendReport", microtime(true) + 10), true);
     }
 
     public function taskExecute($name)
@@ -26,20 +26,20 @@ class ReportManager extends Singleton implements Taskable
 
     private function sendReport()
     {
-        $report = array(
-            'hash' => $this->getHash(),
-            'ip' => Config::getInstance()->getBot_ip(),
-            'matches' => MatchManager::getInstance()->getMatchesCount()
-        );
+        // $report = array(
+        //     'hash' => $this->getHash(),
+        //     'ip' => Config::getInstance()->getBot_ip(),
+        //     'matches' => MatchManager::getInstance()->getMatchesCount()
+        // );
 
-        try {
-            $this->rest_helper('http://www.esport-tools.net/ebot/report/send', json_encode($report), 'POST');
-            Logger::log('Report sent!');
-        } catch (\Exception $e) {
-            Logger::error('Unable to send the report to the eSport-tools.net website');
-        }
+        // try {
+        //     $this->rest_helper('http://www.esport-tools.net/ebot/report/send', json_encode($report), 'POST');
+        //     Logger::log('Report sent!');
+        // } catch (\Exception $e) {
+        //     Logger::error('Unable to send the report to the eSport-tools.net website');
+        // }
 
-        TaskManager::getInstance()->addTask(new Task($this, "sendReport", microtime(true) + 60 * 5), true);
+        // TaskManager::getInstance()->addTask(new Task($this, "sendReport", microtime(true) + 60 * 5), true);
     }
 
     private function rest_helper($url, $params = null, $verb = 'GET', $format = 'json')
